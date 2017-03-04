@@ -1,8 +1,8 @@
 import app from '../server';
-import { Dinosaur } from '../models';
+import { Govt } from '../models';
 
-export function getDinosaur(req, res, next) {	
-	return Dinosaur.count({
+export function getGovt(req, res, next) {	
+	return Govt.count({
 		where: {
 			workerId: req.query.workerId
 		}
@@ -15,10 +15,10 @@ export function getDinosaur(req, res, next) {
 		return res.status(500).json(err);
 	});
 }
-app.get('/dino', getDinosaur);
+app.get('/govt', getGovt);
 
-export function postDinosaur(req, res, next) {
-	return Dinosaur.create({
+export function postGovt(req, res, next) {
+	return Govt.create({
 		mode: req.body.mode,
 		reviewContent: req.body.reviewContent,
 		reviewRating: req.body.reviewRating,
@@ -45,4 +45,4 @@ export function postDinosaur(req, res, next) {
 		return res.status(500).json(err);
 	});
 }
-app.post('/dino', postDinosaur);
+app.post('/govt', postGovt);

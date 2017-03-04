@@ -42,8 +42,52 @@ const Dinosaur = sequelize.define('Dinosaur', {
 	hitId: { type: Sequelize.TEXT },
 });
 
+const Govt = sequelize.define('Govt', {
+	mode: { type: Sequelize.INTEGER },
+	identifiedError: { type: Sequelize.BOOLEAN },
+	identifiedConclusion: { type: Sequelize.BOOLEAN },
+	reviewContent: { type: Sequelize.TEXT },
+	reviewRating: { type: Sequelize.INTEGER },
+	offsetValues: { type: Sequelize.TEXT },
+	offsetInteractions: { type: Sequelize.TEXT },
+	timeOnReview: { type: Sequelize.TEXT },
+	scrollValues: { type: Sequelize.TEXT },
+	levelOfEducation: { type: Sequelize.TEXT },
+	isScientist: { type: Sequelize.BOOLEAN },
+	hasReviewed: { type: Sequelize.TEXT },
+	hasBeenReviewed: { type: Sequelize.TEXT },
+	interestedInTopic: { type: Sequelize.BOOLEAN },
+	feedback: { type: Sequelize.TEXT },
+	workerId: { type: Sequelize.TEXT },
+	assignmentId: { type: Sequelize.TEXT },
+	hitId: { type: Sequelize.TEXT },
+});
+
+const Beef = sequelize.define('Beef', {
+	mode: { type: Sequelize.INTEGER },
+	identifiedError: { type: Sequelize.BOOLEAN },
+	identifiedConclusion: { type: Sequelize.BOOLEAN },
+	reviewContent: { type: Sequelize.TEXT },
+	reviewRating: { type: Sequelize.INTEGER },
+	offsetValues: { type: Sequelize.TEXT },
+	offsetInteractions: { type: Sequelize.TEXT },
+	timeOnReview: { type: Sequelize.TEXT },
+	scrollValues: { type: Sequelize.TEXT },
+	levelOfEducation: { type: Sequelize.TEXT },
+	isScientist: { type: Sequelize.BOOLEAN },
+	hasReviewed: { type: Sequelize.TEXT },
+	hasBeenReviewed: { type: Sequelize.TEXT },
+	interestedInTopic: { type: Sequelize.BOOLEAN },
+	feedback: { type: Sequelize.TEXT },
+	workerId: { type: Sequelize.TEXT },
+	assignmentId: { type: Sequelize.TEXT },
+	hitId: { type: Sequelize.TEXT },
+});
+
 const db = {
 	Dinosaur: Dinosaur,
+	Govt: Govt,
+	Beef: Beef,
 };
 
 db.sequelize = sequelize;

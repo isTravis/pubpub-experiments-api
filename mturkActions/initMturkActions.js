@@ -1,2 +1,3 @@
 require('babel-register');
-require('./getHITs');
+// require('./getHITs');
+require('./createHITs');

@@ -8,7 +8,7 @@ require('../config.js');
 const config = {
 	access: process.env.AWS_ACCESS_KEY_ID,
 	secret: process.env.AWS_SECRET_ACCESS_KEY,
-	sandbox: false // CHANGE EXTERNAL QUESTION URL
+	sandbox: true // CHANGE EXTERNAL QUESTION URL
 };
 
 let mturkClient;
@@ -45,15 +45,34 @@ mturk.createClient(config)
 	})
 	.then(function(xmlQuestion) {
 		const params = {
-			Title: 'Test our MTurk Pipeline (Under a minute)',
-			Description: 'Simply fill in example text and test our submission/approval pipeline',
+			Title: 'Review a Scientific Paper on Dinosaurs (test 5)',
+			Description: 'Provide critique on the logic and conclusions of a scientific paper. Identify any errors that exist.',
 			Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
-			// AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
-			AssignmentDurationInSeconds: 360, // Allow 60 minutes to answer 
+			AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 			AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-			MaxAssignments: 10, // 1 worker responses 
+			MaxAssignments: 8, // 1 worker responses 
 			LifetimeInSeconds: 86400 * 1, // Expire in 1 days 
-			Reward: { CurrencyCode: 'USD', Amount: 0.10 },
+			Reward: { CurrencyCode: 'USD', Amount: 1.00 },
+			Keywords: 'Science Review',
+			QualificationRequirements: [
+				{
+					QualificationTypeId: '00000000000000000071',
+					Comparator: 'EqualTo',
+					LocaleValues: [{
+						Country: 'US',
+					}]
+				},
+				{
+					QualificationTypeId: '000000000000000000L0', // Percent Approved
+					Comparator: 'GreaterThanOrEqualTo',
+					IntegerValues: [80]
+				},
+				{
+					QualificationTypeId: '00000000000000000040', // Percent Approved
+					Comparator: 'GreaterThanOrEqualTo',
+					IntegerValues: [1000]
+				},
+			],
 		};
 		return mturkClient.req('CreateHIT', params);
 	})

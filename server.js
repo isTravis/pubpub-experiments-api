@@ -72,8 +72,9 @@ if (process.env.WORKER !== 'true') {
 	/* ------------------- */
 	/* API Endpoints */
 	/* ------------------- */
-	require('./routes/reviewDiff.js');
 	require('./routes/dinosaur.js');
+	require('./routes/govt.js');
+	require('./routes/beef.js');
 
 	/* ------------------- */
 	/* ------------------- */

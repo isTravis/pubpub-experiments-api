@@ -1,8 +1,8 @@
 import app from '../server';
-import { Dinosaur } from '../models';
+import { Beef } from '../models';
 
-export function getDinosaur(req, res, next) {	
-	return Dinosaur.count({
+export function getBeef(req, res, next) {	
+	return Beef.count({
 		where: {
 			workerId: req.query.workerId
 		}
@@ -11,14 +11,14 @@ export function getDinosaur(req, res, next) {
 		return res.status(201).json(count === 0);
 	})
 	.catch(function(err) {
-		console.error('Error in getDino: ', err);
+		console.error('Error in getBeef: ', err);
 		return res.status(500).json(err);
 	});
 }
-app.get('/dino', getDinosaur);
+app.get('/beef', getBeef);
 
-export function postDinosaur(req, res, next) {
-	return Dinosaur.create({
+export function postBeef(req, res, next) {
+	return Beef.create({
 		mode: req.body.mode,
 		reviewContent: req.body.reviewContent,
 		reviewRating: req.body.reviewRating,
@@ -41,8 +41,8 @@ export function postDinosaur(req, res, next) {
 		return res.status(201).json(true);
 	})
 	.catch(function(err) {
-		console.error('Error in postDino: ', err);
+		console.error('Error in postBeef: ', err);
 		return res.status(500).json(err);
 	});
 }
-app.post('/dino', postDinosaur);
+app.post('/beef', postBeef);
