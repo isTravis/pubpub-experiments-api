@@ -1,35 +1,39 @@
 import AWS from 'aws-sdk';
-import xmlescape from 'xml-escape';
+// import xmlescape from 'xml-escape';
 require('../config.js');
-const sandbox = false;
+const sandbox = true;
+const experimentType = 'dino';
 
 const credentials = new AWS.Credentials({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID, 
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+	accessKeyId: process.env.AWS_ACCESS_KEY_ID, 
+	secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
 
 AWS.config.update({
 	credentials: credentials,
 	apiVersion: '2017-01-17',
-	region: 'us-east-1'
+	region: 'us-east-1',
+	sslEnabled: 'true',
 });
 
-// const mturk = new AWS.MTurk({
-// 	endpoint: sandbox ? 'https://mturk-requester.sandbox.amazonaws.com' : 'https://mturk-requester.amazonaws.com'
-// });
-const mturk = new AWS.MTurk();
+const experimentURL = sandbox 
+	? `https://dev-experiments.pubpub.org/${experimentType}` 
+	: `https://experiments.pubpub.org/${experimentType}`;
 
-const experimentURL = sandbox ? 'https://dev-experiments.pubpub.org/dino' : 'https://experiments.pubpub.org/dino';
+const endpoint = sandbox 
+	? 'https://mturk-requester-sandbox.us-east-1.amazonaws.com'
+	: 'https://mturk-requester.us-east-1.amazonaws.com';
+
+const mturk = new AWS.MTurk({ endpoint: endpoint });
 
 const xmlQuestion = `<ExternalQuestion xmlns="http://mechanicalturk.amazonaws.com/AWSMechanicalTurkDataSchemas/2006-07-14/ExternalQuestion.xsd">
   <ExternalURL>${experimentURL}</ExternalURL>
   <FrameHeight>600</FrameHeight>
 </ExternalQuestion>`;
 
-console.log(xmlQuestion);
 
 const params = {
-	Title: 'Review a Scientific Paper on Dinosaurs',
+	Title: 'Review a Scientific Paper on Dinosaurs (test 1)',
 	Description: 'Provide critique on the logic and conclusions of a scientific paper. Identify any errors that exist.',
 	Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 	AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
@@ -59,12 +63,12 @@ const params = {
 	]
 };
 
-// mturk.createHIT(params, function(err, data) {
-//   if (err) console.log('We have an Error ', err, err.stack); // an error occurred
-//   else console.log(data); // successful response
-// });
-
-mturk.listHITs({}, function(err, data) {
-  if (err) console.log(err, err.stack); // an error occurred
-  else     console.log(JSON.stringify(data, null, 2));           // successful response
+mturk.createHIT(params, function(err, data) {
+	if (err) console.log('We have an Error ', err, err.stack); // an error occurred
+	else console.log(data); // successful response
 });
+
+// mturk.listHITs({}, function(err, data) {
+//   if (err) console.log(err, err.stack); // an error occurred
+//   else     console.log(JSON.stringify(data, null, 2));           // successful response
+// });
