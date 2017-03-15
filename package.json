@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "mturk": "node mturkActions/initMturkActions",
+    "getData": "node data/initGetData.js",
     "start": "nodemon api.js"
   },
   "dependencies": {

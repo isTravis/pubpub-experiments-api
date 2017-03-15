@@ -75,6 +75,7 @@ if (process.env.WORKER !== 'true') {
 	require('./routes/dinosaur.js');
 	require('./routes/govt.js');
 	require('./routes/beef.js');
+	require('./routes/results.js');
 
 	/* ------------------- */
 	/* ------------------- */

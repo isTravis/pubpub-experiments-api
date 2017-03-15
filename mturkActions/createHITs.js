@@ -3,6 +3,16 @@ import AWS from 'aws-sdk';
 require('../config.js');
 const sandbox = true;
 const experimentType = 'dino';
+let title;
+if (experimentType === 'dino') { 
+	title = 'Review a Scientific Paper on Dinosaurs';
+}
+if (experimentType === 'govt') { 
+	title = 'Review a Scientific Paper on Politics';
+}
+if (experimentType === 'beef') { 
+	title = 'Review a Scientific Paper on Diet';
+}
 
 const credentials = new AWS.Credentials({
 	accessKeyId: process.env.AWS_ACCESS_KEY_ID, 
@@ -33,14 +43,14 @@ const xmlQuestion = `<ExternalQuestion xmlns="http://mechanicalturk.amazonaws.co
 
 
 const params = {
-	Title: 'Review a Scientific Paper on Dinosaurs (test 1)',
+	Title: title,
 	Description: 'Provide critique on the logic and conclusions of a scientific paper. Identify any errors that exist.',
 	Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 	AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 	AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-	MaxAssignments: 5, // 1 worker responses 
+	MaxAssignments: 225, // 1 worker responses 
 	LifetimeInSeconds: 86400 * 1, // Expire in 1 days 
-	Reward: '1.00',
+	Reward: '0.75',
 	Keywords: 'Science Review',
 	QualificationRequirements: [
 		{
@@ -53,12 +63,12 @@ const params = {
 		{
 			QualificationTypeId: '000000000000000000L0', // Percent Approved
 			Comparator: 'GreaterThanOrEqualTo',
-			IntegerValues: [80]
+			IntegerValues: [90]
 		},
 		{
 			QualificationTypeId: '00000000000000000040', // Percent Approved
 			Comparator: 'GreaterThanOrEqualTo',
-			IntegerValues: [250]
+			IntegerValues: [500]
 		}
 	]
 };
