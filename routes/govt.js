@@ -25,6 +25,7 @@ export function postGovt(req, res, next) {
 		offsetValues: req.body.offsetValues,
 		offsetInteractions: req.body.offsetInteractions,
 		timeOnReview: req.body.timeOnReview,
+		timeWriting: req.body.timeWriting,
 		scrollValues: req.body.scrollValues,
 		levelOfEducation: req.body.levelOfEducation,
 		isScientist: req.body.isScientist,

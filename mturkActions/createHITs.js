@@ -1,8 +1,14 @@
 import AWS from 'aws-sdk';
-// import xmlescape from 'xml-escape';
 require('../config.js');
+
+// -----------
+// Parameters to Change
+// -----------
 const sandbox = true;
 const experimentType = 'dino';
+// -----------
+// -----------
+
 let title;
 if (experimentType === 'dino') { 
 	title = 'Review a Scientific Paper on Dinosaurs';
@@ -48,9 +54,9 @@ const params = {
 	Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 	AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 	AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-	MaxAssignments: 225, // 1 worker responses 
+	MaxAssignments: 150, // 1 worker responses 
 	LifetimeInSeconds: 86400 * 1, // Expire in 1 days 
-	Reward: '0.75',
+	Reward: '1.00',
 	Keywords: 'Science Review',
 	QualificationRequirements: [
 		{
