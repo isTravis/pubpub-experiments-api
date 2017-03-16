@@ -54,7 +54,7 @@ const params = {
 	Question: xmlQuestion, // IMPORTANT: XML NEEDS TO BE ESCAPED! 
 	AssignmentDurationInSeconds: 3600, // Allow 60 minutes to answer 
 	AutoApprovalDelayInSeconds: 86400 * 1, // 1 day auto approve 
-	MaxAssignments: 150, // 1 worker responses 
+	MaxAssignments: 10, // 1 worker responses 
 	LifetimeInSeconds: 86400 * 1, // Expire in 1 days 
 	Reward: '1.00',
 	Keywords: 'Science Review',
